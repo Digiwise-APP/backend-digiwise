@@ -1,4 +1,4 @@
-import { createQuestionRepo, getQuestionRepo } from "../repository/question.js";
+import { createQuestionRepo, getQuestionRepo, getQuestionByIdRepo } from "../repository/question.js";
 
 const createQuestionService = async (dataQuestion) => {
   try {
@@ -14,9 +14,18 @@ const getQuestionService = async () => {
   try {
     return await getQuestionRepo();
   } catch (error) {
-    console.log("service : failed to get question");
+    console.log("service : failed to get all data question");
     throw error;
   }
 };
 
-export { createQuestionService, getQuestionService };
+const getQuestionByIdService = async (id) => {
+  try {
+    return await getQuestionByIdRepo(id);
+  } catch (error) {
+    console.log("service : failed to get question by id");
+    throw error;
+  }
+};
+
+export { createQuestionService, getQuestionService, getQuestionByIdService };

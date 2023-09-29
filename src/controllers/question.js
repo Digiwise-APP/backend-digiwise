@@ -1,4 +1,4 @@
-import { createQuestionService, getQuestionService } from "../services/question.js";
+import { createQuestionService, getQuestionService, getQuestionByIdService } from "../services/question.js";
 import { generateResponse, responseError } from "../pkg/responder.js";
 
 const createQuestionController = async (req, res) => {
@@ -40,4 +40,19 @@ const getQuestionController = async (req, res) => {
   }
 };
 
-export { createQuestionController, getQuestionController };
+const getQuestionByIdController = async (req, res) => {
+  try {
+    const questionId = req.params.id;
+    const question = await getQuestionByIdService(questionId);
+
+    if (!question) {
+      throw new responseError("question not found", 400);
+    }
+
+    generateResponse(res, 200, "success get data question by id", question);
+  } catch (error) {
+    responseError(res, error);
+  }
+};
+
+export { createQuestionController, getQuestionController, getQuestionByIdController };

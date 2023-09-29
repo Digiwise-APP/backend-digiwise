@@ -12,12 +12,22 @@ const createQuestionRepo = async (data) => {
 
 const getQuestionRepo = async () => {
   try {
-    const saveQuestion = await modelQuestion.find();
-    return saveQuestion;
+    const dataQuestion = await modelQuestion.find();
+    return dataQuestion;
   } catch (error) {
-    console.log("repo : failed to get question");
+    console.log("repo : failed to get all data question");
     throw error;
   }
 };
 
-export { createQuestionRepo, getQuestionRepo };
+const getQuestionByIdRepo = async (id) => {
+  try {
+    const dataQuestion = await modelQuestion.findById(id);
+    return dataQuestion;
+  } catch (error) {
+    console.log("repo : failed to get question by id");
+    throw error;
+  }
+};
+
+export { createQuestionRepo, getQuestionRepo, getQuestionByIdRepo };
