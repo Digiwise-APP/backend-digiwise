@@ -10,4 +10,14 @@ const createQuestionRepo = async (data) => {
   }
 };
 
-export { createQuestionRepo };
+const getQuestionRepo = async () => {
+  try {
+    const saveQuestion = await modelQuestion.find();
+    return saveQuestion;
+  } catch (error) {
+    console.log("repo : failed to get question");
+    throw error;
+  }
+};
+
+export { createQuestionRepo, getQuestionRepo };

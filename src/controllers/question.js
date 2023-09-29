@@ -1,4 +1,4 @@
-import { createQuestionService } from "../services/question.js";
+import { createQuestionService, getQuestionService } from "../services/question.js";
 import { generateResponse, responseError } from "../pkg/responder.js";
 
 const createQuestionController = async (req, res) => {
@@ -31,4 +31,13 @@ const createQuestionController = async (req, res) => {
   }
 };
 
-export { createQuestionController };
+const getQuestionController = async (req, res) => {
+  try {
+    let dataQuestion = await getQuestionService();
+    generateResponse(res, 200, "success get all data question", dataQuestion);
+  } catch (error) {
+    responseError(res, error);
+  }
+};
+
+export { createQuestionController, getQuestionController };
