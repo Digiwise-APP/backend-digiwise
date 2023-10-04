@@ -8,9 +8,9 @@ const connectDB = async () => {
   });
 
   const db = mongoose.connection;
-  db.on("error", console.error.bind(console, "Koneksi database gagal:"));
+  db.on("error", console.error.bind(console, "failed to connect database"));
   db.once("open", () => {
-    console.log("Koneksi database berhasil.");
+    console.log("Database Connected");
   });
 };
 
