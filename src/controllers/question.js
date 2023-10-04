@@ -10,9 +10,6 @@ const createQuestionController = async (req, res) => {
     if (question == "") {
       throw new responseError("question is required", 400);
     }
-    if (question == "") {
-      throw new responseError("question is required", 400);
-    }
     if (option_answer == null) {
       throw new responseError("option answer is required", 400);
     }
