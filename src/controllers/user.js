@@ -17,7 +17,7 @@ const createUserController = async (req, res) => {
       throw new responseError("image profile type is required", 400);
     }
 
-    let newUser = await createUserService(req.body);
+    let newUser = await createUserService(_id, username, email, img_profile);
 
     generateResponse(res, 201, "success create user", newUser);
   } catch (error) {

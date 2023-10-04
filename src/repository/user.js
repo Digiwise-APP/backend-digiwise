@@ -1,6 +1,6 @@
 import { modelUser } from "../models/user.js";
 
-const createUser = async (userData) => {
+const createUserRepo = async (userData) => {
   try {
     const savedUser = await modelUser.create(userData);
     return savedUser;
@@ -10,4 +10,14 @@ const createUser = async (userData) => {
   }
 };
 
-export { createUser };
+const getUserByEmailRepo = async (email) => {
+  try {
+    const dataUser = await modelUser.findOne(email);
+    return dataUser;
+  } catch (error) {
+    console.log("repo : failed to get user by Id");
+    throw error;
+  }
+};
+
+export { createUserRepo, getUserByEmailRepo };
