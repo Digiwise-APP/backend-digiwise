@@ -1,31 +1,33 @@
-import Level from "../models/level.js";
+import { Level } from "../models/level.js";
 
-async function createLevel(levelData) {
+const createLevel = async (levelData) => {
   try {
-    const newLevel = new Level(levelData);
-    const savedLevel = await newLevel.save();
+    const savedLevel = await Level.save(levelData);
     return savedLevel;
   } catch (error) {
-    throw new Error("Gagal membuat level baru.");
+    console.log("repo : failed to create level");
+    throw error;
   }
-}
+};
 
-async function getAllLevels() {
+const getAllLevels = async () => {
   try {
     const levels = await Level.find();
     return levels;
   } catch (error) {
-    throw new Error("Gagal mengambil data level.");
+    console.log("repo : failed to get all data ");
+    throw error;
   }
-}
+};
 
-async function getLevelById(levelId) {
+const getLevelById = async (levelId) => {
   try {
     const level = await Level.findById(levelId);
     return level;
   } catch (error) {
-    throw new Error("Gagal mengambil data level berdasarkan ID.");
+    console.log("repo : failed to get data level by id ");
+    throw error;
   }
-}
+};
 
-export { createLevel, getAllLevels,  getLevelById};
+export { createLevel, getAllLevels, getLevelById };
