@@ -1,6 +1,6 @@
 import { Level } from "../models/level.js";
 
-const createLevel = async (levelData) => {
+const createLevelRepo = async (levelData) => {
   try {
     const savedLevel = await Level.save(levelData);
     return savedLevel;
@@ -10,7 +10,7 @@ const createLevel = async (levelData) => {
   }
 };
 
-const getAllLevels = async () => {
+const getAllLevelsRepo = async () => {
   try {
     const levels = await Level.find();
     return levels;
@@ -20,7 +20,7 @@ const getAllLevels = async () => {
   }
 };
 
-const getLevelById = async (levelId) => {
+const getLevelByIdRepo = async (levelId) => {
   try {
     const level = await Level.findById(levelId);
     return level;
@@ -30,4 +30,16 @@ const getLevelById = async (levelId) => {
   }
 };
 
-export { createLevel, getAllLevels, getLevelById };
+const getLevelWithParamRepo = async (level) => {
+  console.log(level, 12345);
+  try {
+    const data = await Level.find({ level: level });
+    console.log(data, 9876);
+    return data;
+  } catch (error) {
+    console.log("repo : failed to get data level with param");
+    throw error;
+  }
+};
+
+export { createLevelRepo, getAllLevelsRepo, getLevelByIdRepo, getLevelWithParamRepo };
