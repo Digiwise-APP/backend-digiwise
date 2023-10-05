@@ -13,7 +13,7 @@ const questionSchema = new Schema(
       required: true,
     },
     option_answer: {
-      type: Array,
+      type: Object,
       required: true,
     },
     real_answer: {
