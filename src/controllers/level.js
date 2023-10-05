@@ -1,4 +1,4 @@
-import { createLevelService, getAllLevelService,getLevelByIdService, getLevelWithParamService } from "../services/level.js";
+import { createLevelService, getAllLevelService, getLevelByIdService, getLevelWithParamService } from "../services/level.js";
 import { generateResponse, responseError } from "../pkg/responder.js";
 
 const createLevelController = async (req, res) => {
@@ -36,10 +36,10 @@ const getLevelByIdController = async (req, res) => {
     const level = await getLevelByIdService(levelId);
 
     if (!level) {
-      return res.status(404).json({ error: "Data level tidak ditemukan." });
+      return res.status(404).json({ error: "Level by not found" });
     }
 
-    generateResponse(res, 200, "success get detail level", level);
+    generateResponse(res, 200, "success get level by ID", level);
   } catch (error) {
     responseError(res, error);
   }
