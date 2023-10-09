@@ -3,14 +3,14 @@ import { generateResponse, responseError } from "../pkg/responder.js";
 
 const createQuestionController = async (req, res) => {
   try {
-    let { level, question, option_answer, real_answer, question_type } = req.body;
+    let { level, question, option_answer, real_answer, question_type, url_image } = req.body;
     if (level == 0) {
       throw new responseError("level is required", 400);
     }
     if (question == "") {
       throw new responseError("question is required", 400);
     }
-    if (option_answer == null) {
+    if (option_answer == {}) {
       throw new responseError("option answer is required", 400);
     }
     if (real_answer == "") {
@@ -30,8 +30,8 @@ const createQuestionController = async (req, res) => {
 
 const getQuestionController = async (req, res) => {
   try {
-    let dataQuestion = await getQuestionService();
-    generateResponse(res, 200, "success get all data question", dataQuestion);
+    const questions = await getQuestionService();
+    generateResponse(res, 200, "success get all data question", questions);
   } catch (error) {
     responseError(res, error);
   }

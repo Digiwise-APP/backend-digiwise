@@ -4,8 +4,7 @@ const { Schema } = mongoose;
 const questionSchema = new Schema(
   {
     level: {
-      type: Schema.Types.ObjectId,
-      ref: "Level",
+      type: Number,
       required: true,
     },
     question: {
@@ -23,6 +22,10 @@ const questionSchema = new Schema(
     question_type: {
       type: String,
       required: true,
+    },
+    url_image: {
+      type: String,
+      require: false,
     },
   },
   {
