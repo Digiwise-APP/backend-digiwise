@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get("/level", getLevelWithParamController);
 
-router.post("/level", createLevelController);
-router.get("/level", getAllLevelsController);
-router.get("/level/:id", getLevelByIdController);
+router.post("/", createLevelController);
+router.get("/", getAllLevelsController);
+router.get("/:id", getLevelByIdController);
 
 export default router;
