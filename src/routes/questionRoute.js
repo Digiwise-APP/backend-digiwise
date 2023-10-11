@@ -1,3 +1,4 @@
+// import dataController from "../controllers";
 import express from "express";
 import { createQuestionController, getQuestionController, getQuestionByIdController } from "../controllers/question.js";
 const router = express.Router();

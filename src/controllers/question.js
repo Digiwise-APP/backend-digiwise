@@ -1,7 +1,8 @@
 import { createQuestionService, getQuestionService, getQuestionByIdService } from "../services/question.js";
+// import Service from "../services";
 import { generateResponse, responseError } from "../pkg/responder.js";
 
-const createQuestionController = async (req, res) => {
+export const createQuestionController = async (req, res) => {
   try {
     let { level, question, option_answer, real_answer, question_type, url_image } = req.body;
     if (level == 0) {
@@ -28,7 +29,7 @@ const createQuestionController = async (req, res) => {
   }
 };
 
-const getQuestionController = async (req, res) => {
+export const getQuestionController = async (req, res) => {
   try {
     const questions = await getQuestionService();
     generateResponse(res, 200, "success get all data question", questions);
@@ -37,7 +38,7 @@ const getQuestionController = async (req, res) => {
   }
 };
 
-const getQuestionByIdController = async (req, res) => {
+export const getQuestionByIdController = async (req, res) => {
   try {
     const questionId = req.params.id;
     const question = await getQuestionByIdService(questionId);
@@ -52,4 +53,7 @@ const getQuestionByIdController = async (req, res) => {
   }
 };
 
-export { createQuestionController, getQuestionController, getQuestionByIdController };
+// const ControllerQuestion = { createQuestionController, getQuestionController, getQuestionByIdController };
+// export default ControllerQuestion;
+
+// export { createQuestionController, getQuestionController, getQuestionByIdController };

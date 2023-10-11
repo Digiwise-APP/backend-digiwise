@@ -1,5 +1,5 @@
 import { generateResponse, responseError } from "../pkg/responder.js";
-import { createUserService } from "../services/user.js";
+import { createUserService, getUserByEmailService } from "../services/user.js";
 
 const createUserController = async (req, res) => {
   try {
@@ -18,11 +18,21 @@ const createUserController = async (req, res) => {
     }
 
     let newUser = await createUserService(_id, username, email, img_profile);
-
     generateResponse(res, 201, "success create user", newUser);
   } catch (error) {
     responseError(res, error);
   }
 };
 
-export { createUserController };
+const getUserByEmailController = async (req, res) => {
+  try {
+    const emailId = req.params.id;
+    const dataEmail = await getUserByEmailService(emailId);
+
+    generateResponse(res, 200, "success get data email by id", dataEmail);
+  } catch (error) {
+    responseError(res, error);
+  }
+};
+
+export { createUserController, getUserByEmailController };

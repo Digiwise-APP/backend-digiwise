@@ -2,7 +2,7 @@ import { Level } from "../models/level.js";
 
 const createLevelRepo = async (levelData) => {
   try {
-    const savedLevel = await Level.save(levelData);
+    const savedLevel = await Level.create(levelData);
     return savedLevel;
   } catch (error) {
     console.log("repo : failed to create level");

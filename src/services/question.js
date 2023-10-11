@@ -1,4 +1,5 @@
 import { createQuestionRepo, getQuestionRepo, getQuestionByIdRepo } from "../repository/question.js";
+// import Repo from "../repository";
 
 const createQuestionService = async (dataQuestion) => {
   try {

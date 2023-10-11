@@ -10,7 +10,7 @@ const createLevelController = async (req, res) => {
     if (id_user == "") {
       throw new responseError("id_user is required", 400);
     }
-    if (passed === false || typeof passed == "string") {
+    if (passed == false || typeof passed == "string") {
       throw new responseError("passed is required", 400);
     }
 
@@ -55,4 +55,5 @@ const getLevelWithParamController = async (req, res) => {
   }
 };
 
-export { createLevelController, getAllLevelsController, getLevelByIdController, getLevelWithParamController };
+const ControllerLevel = { createLevelController, getAllLevelsController, getLevelByIdController, getLevelWithParamController };
+export default ControllerLevel;

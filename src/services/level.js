@@ -34,7 +34,7 @@ const getLevelByIdService = async (levelId) => {
 const getLevelWithParamService = async (level) => {
   try {
     const checkLevel = await getLevelWithParamRepo(level);
-    if (!checkLevel) {
+    if (checkLevel.length < 1) {
       console.log("service : level not found");
       throw new responseError("level not found", 404);
     }

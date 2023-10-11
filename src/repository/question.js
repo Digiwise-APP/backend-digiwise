@@ -1,4 +1,5 @@
 import { modelQuestion } from "../models/question.js";
+// import Model from "../models";
 
 const createQuestionRepo = async (data) => {
   try {
