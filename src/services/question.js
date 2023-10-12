@@ -29,4 +29,8 @@ const getQuestionByIdService = async (id) => {
   }
 };
 
+const calculateTotalScoreService = async (user_answer) =>{
+  
+}
+
 export { createQuestionService, getQuestionService, getQuestionByIdService };

@@ -53,6 +53,24 @@ export const getQuestionByIdController = async (req, res) => {
   }
 };
 
+export const calculateTotalScoreController = async (req, res) => {
+  try {
+    let { level, id_user, user_answer } = req.body;
+
+    if (level == 0) {
+      throw new responseError("level is required", 400);
+    }
+    if (id_user == "") {
+      throw new responseError("question is required", 400);
+    }
+    if (user_answer == "") {
+      throw new responseError("option answer is required", 400);
+    }
+  } catch (error) {
+    responseError(res, error);
+  }
+};
+
 // const ControllerQuestion = { createQuestionController, getQuestionController, getQuestionByIdController };
 // export default ControllerQuestion;
 

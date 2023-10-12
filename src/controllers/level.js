@@ -55,5 +55,7 @@ const getLevelWithParamController = async (req, res) => {
   }
 };
 
-const ControllerLevel = { createLevelController, getAllLevelsController, getLevelByIdController, getLevelWithParamController };
-export default ControllerLevel;
+// const ControllerLevel = { createLevelController, getAllLevelsController, getLevelByIdController, getLevelWithParamController };
+// export default ControllerLevel;
+
+export { createLevelController, getAllLevelsController, getLevelByIdController, getLevelWithParamController };
