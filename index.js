@@ -2,8 +2,8 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import routeQuestion from "./src/routes/questionRoute.js";
-import routeLevel from "./src/routes/level.js";
-import routeUser from "./src/routes/user.js";
+
+import developRouter from "./src/routes/developRoutes.js";
 
 import { connectDB } from "./src/utils/db.js";
 
@@ -14,9 +14,10 @@ const port = 5000;
 app.use(express.json());
 app.use(cors());
 
+//develop
+app.use("/question", developRouter);
+
 app.use("/quiz", routeQuestion);
-app.use("/levels", routeLevel);
-app.use("/users", routeUser);
 
 connectDB().then(() => {
   app.listen(port, () => {
