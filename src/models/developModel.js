@@ -33,7 +33,7 @@ const userAnswerSchema = new mongoose.Schema(
   {
     question_id: { type: String, ref: "Question" },
     user_id: { type: String, ref: "User" },
-    question_type: { type: String, enum: ["PG", "TrueFalse", "CheckBox"], required: true },
+    question_type: { type: String, enum: ["PG", "truefalse", "checkbox"], required: true },
     question: { type: String, required: true },
     option_answer: { type: String },
     level: { type: Number, required: true, enum: [1, 2, 3, 4, 5] },
