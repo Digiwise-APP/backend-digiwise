@@ -1,8 +1,13 @@
 import express from "express";
-import {developCreateQuestionController} from "../controllers/developQuestionController.js";
-
 const router = express.Router();
 
-router.post("/", developCreateQuestionController);
+import questionRoute from "./developQuestionRoutes.js";
+import userRoute from "./developUserRoutes.js";
+
+// ----------------- User ----------------------------
+router.use("/users", userRoute);
+
+// ----------------- Question ------------------------
+router.use("/questions", questionRoute);
 
 export default router;

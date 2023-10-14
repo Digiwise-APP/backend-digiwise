@@ -1,4 +1,4 @@
-import developCreateQuestionService from "../services/developQuestionService.js";
+import { developCreateQuestionService, developGetQuestionByIdService, developGetAllQuestionsService } from "../services/developQuestionService.js";
 
 import { generateResponse, responseError } from "../pkg/responder.js";
 
@@ -24,6 +24,25 @@ export const developCreateQuestionController = async (req, res) => {
     let newQuestion = await developCreateQuestionService(req.body);
 
     generateResponse(res, 201, "success create question", newQuestion);
+  } catch (error) {
+    responseError(res, error);
+  }
+};
+
+export const developGetQuestionByIdController = async (req, res) => {
+  try {
+    const questionId = req.params.id;
+    const dataQuestionId = await developGetQuestionByIdService(questionId);
+    generateResponse(res, 200, "success question by id", dataQuestionId);
+  } catch (error) {
+    responseError(res, error);
+  }
+};
+
+export const developGetAllQuestionsController = async (req, res) => {
+  try {
+    const dataQuestions = await developGetAllQuestionsService();
+    generateResponse(res, 200, "success question by id", dataQuestions);
   } catch (error) {
     responseError(res, error);
   }

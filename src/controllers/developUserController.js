@@ -1,4 +1,5 @@
-import { developCreateUserService, developLoginUserService } from "../services/developUserService.js";
+import { developCreateUserService, developLoginUserService, developGetAllUserService, developGetUserByIdService, developGetQuestionUserByLevelService, developGetQuestionUserByIdQuestionService } from "../services/developUserService.js";
+// import { developGetAllQuestionsService } from "../services/developQuestionService.js";
 import { generateResponse, responseError } from "../pkg/responder.js";
 import { CustomError } from "../pkg/customError.js";
 
@@ -35,6 +36,49 @@ export const developLoginUserController = async (req, res) => {
     const token = await developLoginUserService(email, password);
 
     generateResponse(res, 200, "success login", token);
+  } catch (error) {
+    responseError(res, error);
+  }
+};
+
+export const developGetAllUserController = async (req, res) => {
+  try {
+    const users = await developGetAllUserService();
+    generateResponse(res, 200, "success get all user", users);
+  } catch (error) {
+    responseError(res, error);
+  }
+};
+
+export const developGetUserByIdController = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await developGetUserByIdService(id);
+
+    generateResponse(res, 200, "success get user by id", user);
+  } catch (error) {
+    responseError(res, error);
+  }
+};
+
+export const developGetQuestionUserByLevelController = async (req, res) => {
+  try {
+    const { level } = req.query;
+    const id = req.params.id;
+    const questionByLevel = await developGetQuestionUserByLevelService(level, id);
+    generateResponse(res, 200, "success get questions by User level", questionByLevel);
+  } catch (error) {
+    responseError(res, error);
+  }
+};
+
+export const developGetQuestionUserByIdQuestionController = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const questionId = req.params.questionId;
+
+    const questionById = await developGetQuestionUserByIdQuestionService(userId, questionId);
+    generateResponse(res, 200, "success get questions Id by User level passed", questionById);
   } catch (error) {
     responseError(res, error);
   }
