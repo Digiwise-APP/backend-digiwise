@@ -25,6 +25,7 @@ export const developCreateUserService = async (username, email, password, img_pr
 
 export const developLoginUserService = async (email, password) => {
   try {
+    console.log(email, password, 4545);
     const user = await developGetUserByEmailRepo({ email });
     if (!user) {
       console.log("service : user not found");
@@ -37,9 +38,16 @@ export const developLoginUserService = async (email, password) => {
       throw new CustomError("Wrong Email or Password ", 400);
     }
 
-    const token = jwt.sign({ email }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      {
+        user_id: user._id,
+        email: user.email,
+        username: user.username,
+      },
+      process.env.JWT_SECRET
+    );
 
-    return { token, user };
+    return { token };
   } catch (error) {
     console.log("service : please register first");
     throw error;
@@ -74,7 +82,7 @@ export const developGetQuestionUserByLevelService = async (level, id) => {
       throw new responseError("service: user not found", 404);
     }
 
-    if (level == userId.level) {
+    if (level <= userId.level) {
       const dataLevel = await developGetQuestionByLevelRepo(level);
       return dataLevel;
     } else {
@@ -100,13 +108,35 @@ export const developGetQuestionUserByIdQuestionService = async (userId, question
       throw new responseError("service: question not found", 404);
     }
 
-    if (userData.level == questionData.level) {
+    if (userData.level >= questionData.level) {
       return questionData;
     } else {
       throw new CustomError("Kamu belum bisa akses quiz ini, karna level kamu belum mencukupi", 400);
     }
   } catch (error) {
     console.log("service : failed to get question user by id question", error);
+    throw error;
+  }
+};
+
+export const developUserAnswerController = async (userId) => {
+  try {
+    // cek user ada atau tidak
+    const userData = await developGetUserByIdRepo(userId);
+    if (!userData) {
+      console.log("service: user not found");
+      throw new responseError("service: user not found", 404);
+    }
+
+    // ambil tiap level untuk mengecek
+    const questionId = await (level);
+    if (dataLevel == userData.level) {
+      // lakukan kalkulasi nilai
+    } else {
+      throw new CustomError("Kamu belum bisa akses quiz ini, karna level kamu belum mencukupi", 400);
+    }
+  } catch (error) {
+    console.log("service : failed to post questions Id by User level", error);
     throw error;
   }
 };

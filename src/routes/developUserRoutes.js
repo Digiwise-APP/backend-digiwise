@@ -7,6 +7,7 @@ import {
   developGetUserByIdController,
   developGetQuestionUserByLevelController,
   developGetQuestionUserByIdQuestionController,
+  developUserAnswerController,
 } from "../controllers/developUserController.js";
 import { verifyToken } from "../middleware/authMiddleware.js";
 
@@ -14,12 +15,12 @@ router.post("/register", developCreateUserController);
 router.post("/login", developLoginUserController);
 
 // ----------------------- to GET question By User ------------------------------------
-router.get("/:id/question", verifyToken, developGetQuestionUserByLevelController);
-router.get("/:userId/question/:questionId", verifyToken, developGetQuestionUserByIdQuestionController);
+router.get("/questions", verifyToken, developGetQuestionUserByLevelController);
+router.get("/question/:questionId", verifyToken, developGetQuestionUserByIdQuestionController);
 
 // --------------------------------- ANSWER USER -----------------------------------
-// router.post("/:id/answer", verifyToken, ) upload jawaban
-// router.get("/:id/answer", verifyToken, ) get jawaban user
+router.post("/answers/:userId", verifyToken, developUserAnswerController);
+// router.get("/answer", verifyToken, ) get jawaban user
 
 router.get("/", developGetAllUserController);
 router.get("/:id", developGetUserByIdController);

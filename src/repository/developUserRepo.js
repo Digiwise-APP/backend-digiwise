@@ -11,6 +11,7 @@ export const developCreateUserRepo = async (data) => {
 };
 export const developGetUserByEmailRepo = async (email) => {
   try {
+    console.log(email, 6767);
     const user = await Userdevelop.findOne(email).select("-id");
     return user;
   } catch (error) {
