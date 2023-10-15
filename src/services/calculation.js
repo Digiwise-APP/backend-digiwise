@@ -4,18 +4,23 @@ export const compareAnswer = async (answerUser) => {
   try {
     console.log(8989, answerUser);
 
-    const userAnswerArr = [];
-    userAnswerArr.forEach((answer) => {
-      console.log(questionId, 7171);
-      console.log("Question ID:", answer.questionId);
-      console.log("User Answer:", answer.userAnswer);
-    });
-    const questionId = await developGetQuestionByIdRepo(answer.questionId);
+    for (let i = 0; i < answerUser.length; i++) {
+      const item = answerUser[i];
+      const questionId = item.question_id;
+      const userAnswer = item.user_answer;
+      console.log(9090, userAnswer, questionId);
 
-    console.log(userAnswerArr, 8181);
-    console.log(questionId, 71717);
+      const idQuestion = await developGetQuestionByIdRepo(questionId);
+      console.log(idQuestion, 4848);
+      const dataRealAnswer = idQuestion.real_answer;
+      console.log(dataRealAnswer, 6161);
 
-    console.log(userId, 6464);
+      if (idQuestion == questionId) {
+        console.log(idQuestion.real_answer, 1919);
+      }
+
+      return idQuestion;
+    }
   } catch (error) {
     throw error;
   }

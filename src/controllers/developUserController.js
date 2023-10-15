@@ -93,16 +93,14 @@ export const developUserAnswerController = async (req, res) => {
       user_answer: answer.user_answer,
     }));
 
-    userAnswer.forEach((answerObj) => {
-      const questionId = answerObj.question_id;
-      const userAnswer = answerObj.user_answer;
-
-      userAnswerArr.push({ questionId, userAnswer });
-    });
-
-    console.log(userAnswer, 3737);
-
+    console.log(userAnswer, 1414);
     const calculate = compareAnswer(userAnswer);
+    // userAnswer.forEach((answerObj) => {
+    //   const questionId = answerObj.question_id;
+    //   const userAnswer = answerObj.user_answer;
+
+      // userAnswerArr.push({ questionId, userAnswer });
+    // });
 
     // const dataAnswers = await
 

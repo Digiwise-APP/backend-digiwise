@@ -12,7 +12,10 @@ export const developCreateQuestionRepo = async (data) => {
 
 export const developGetQuestionByIdRepo = async (id) => {
   try {
-    const questionId = Questiondevelop.findById(id).select("-real_answer");
+    // const questionId = Questiondevelop.findById(id).select("-real_answer");
+    const questionId = Questiondevelop.findById(id);
+    // console.log(questionId, 678);
+
     return questionId;
   } catch (error) {
     console.log("repo : failed to get question by id");
