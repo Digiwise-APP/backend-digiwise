@@ -1,9 +1,9 @@
 import { developCreateUserRepo, developGetUserByEmailRepo, developGetAllUserRepo, developGetUserByIdRepo } from "../repository/developUserRepo.js";
 import { developGetQuestionByLevelRepo, developGetQuestionByIdRepo } from "../repository/developQuestionRepo.js";
 import { CustomError } from "../pkg/customError.js";
+import { compareAnswer } from "./calculation.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { get } from "mongoose";
 
 export const developCreateUserService = async (username, email, password, img_profile) => {
   try {
@@ -119,22 +119,27 @@ export const developGetQuestionUserByIdQuestionService = async (userId, question
   }
 };
 
-export const developUserAnswerController = async (userId) => {
+export const developUserAnswerService = async (userId, level, userAnswer, questionType) => {
   try {
-    // cek user ada atau tidak
+    //ambil data user
+    const dataLevel = await developGetQuestionByLevelRepo(level);
     const userData = await developGetUserByIdRepo(userId);
-    if (!userData) {
-      console.log("service: user not found");
-      throw new responseError("service: user not found", 404);
-    }
 
     // ambil tiap level untuk mengecek
-    const questionId = await (level);
-    if (dataLevel == userData.level) {
-      // lakukan kalkulasi nilai
+    const questionTypes = dataLevel.map((item) => item.question_type);
+
+    if (userData.level == level) {
+      if (questionTypes[0] !== questionType) {
+        throw new CustomError("the question types are not the same", 400);
+      }
+    } else if (userData.level > level) {
+      throw new CustomError("Silahkan kerjakan level berikutnya", 400);
     } else {
       throw new CustomError("Kamu belum bisa akses quiz ini, karna level kamu belum mencukupi", 400);
     }
+
+    const calculate = compareAnswer(userAnswer, userId);
+    return calculate;
   } catch (error) {
     console.log("service : failed to post questions Id by User level", error);
     throw error;
