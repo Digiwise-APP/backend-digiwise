@@ -1,4 +1,12 @@
-import { developCreateUserService, developLoginUserService, developGetAllUserService, developGetUserByIdService, developGetQuestionUserByLevelService, developGetQuestionUserByIdQuestionService } from "../services/developUserService.js";
+import {
+  developCreateUserService,
+  developLoginUserService,
+  developGetAllUserService,
+  developGetUserByIdService,
+  developGetQuestionUserByLevelService,
+  developGetQuestionUserByIdQuestionService,
+  developUserAnswerService,
+} from "../services/developUserService.js";
 import { compareAnswer } from "../services/calculation.js";
 import { generateResponse, responseError } from "../pkg/responder.js";
 import { CustomError } from "../pkg/customError.js";
@@ -86,25 +94,15 @@ export const developGetQuestionUserByIdQuestionController = async (req, res) => 
 export const developUserAnswerController = async (req, res) => {
   try {
     const userId = req.user.user_id;
-
     const { level, question_type, answers } = req.body;
     const userAnswer = answers.map((answer) => ({
       question_id: answer.question_id,
       user_answer: answer.user_answer,
     }));
+    
+    const result = await developUserAnswerService(userId, level, userAnswer, question_type);
 
-    console.log(userAnswer, 1414);
-    const calculate = compareAnswer(userAnswer);
-    // userAnswer.forEach((answerObj) => {
-    //   const questionId = answerObj.question_id;
-    //   const userAnswer = answerObj.user_answer;
-
-      // userAnswerArr.push({ questionId, userAnswer });
-    // });
-
-    // const dataAnswers = await
-
-    generateResponse(res, 201, "success post questions Id by User level passed", calculate);
+    generateResponse(res, 201, "success post questions Id by User level passed", result);
   } catch (error) {
     responseError(res, error);
   }

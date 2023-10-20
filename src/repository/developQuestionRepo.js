@@ -13,8 +13,7 @@ export const developCreateQuestionRepo = async (data) => {
 export const developGetQuestionByIdRepo = async (id) => {
   try {
     // const questionId = Questiondevelop.findById(id).select("-real_answer");
-    const questionId = Questiondevelop.findById(id);
-    // console.log(questionId, 678);
+    const questionId = await Questiondevelop.findById(id);
 
     return questionId;
   } catch (error) {
