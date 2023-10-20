@@ -10,7 +10,6 @@ const developUserSchema = new mongoose.Schema(
   },
   {
     versionKey: false,
-    timestamps: true,
   }
 );
 
@@ -25,7 +24,6 @@ const developQuestionSchema = new mongoose.Schema(
   },
   {
     versionKey: false,
-    timestamps: true,
   }
 );
 
