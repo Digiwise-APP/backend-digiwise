@@ -19,7 +19,7 @@
 
 #### Answer User
 
-1. Method POST `http://localhost:5000/users/answers/:id` to send user answer
+1. Method POST `http://localhost:5000/users/answers` to send user answer
 
 #### Data User
 
