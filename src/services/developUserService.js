@@ -25,7 +25,6 @@ export const developCreateUserService = async (username, email, password, img_pr
 
 export const developLoginUserService = async (email, password) => {
   try {
-    console.log(email, password, 4545);
     const user = await developGetUserByEmailRepo({ email });
     if (!user) {
       console.log("service : user not found");

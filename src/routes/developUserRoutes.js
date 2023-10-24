@@ -19,8 +19,7 @@ router.get("/questions", verifyToken, developGetQuestionUserByLevelController);
 router.get("/question/:questionId", verifyToken, developGetQuestionUserByIdQuestionController);
 
 // --------------------------------- ANSWER USER -----------------------------------
-router.post("/answers/:userId", verifyToken, developUserAnswerController);
-// router.get("/answer", verifyToken, ) get jawaban user
+router.post("/answers", verifyToken, developUserAnswerController);
 
 router.get("/", developGetAllUserController);
 router.get("/:id", developGetUserByIdController);
