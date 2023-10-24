@@ -1,21 +1,24 @@
-// import { CustomError } from "../pkg/customError.js";
 import { developGetQuestionByIdRepo } from "../repository/developQuestionRepo.js";
-import { developUpdateLevelUserRepo } from "../repository/developUserRepo.js";
-export const compareAnswer = async (answerUser, userId) => {
-  let usersScore = 0;
+import { developUpdateLevelUserRepo, developCreateAnswerUserRepo } from "../repository/developUserRepo.js";
+export const compareAnswer = async (answerUser, user_id, level, question_type) => {
+  let score = 0;
+  let question_id = [];
+  let user_answer = [];
   for (let i = 0; i < answerUser.length; i++) {
     try {
       const item = answerUser[i];
       if (item && item.question_id) {
-        const questionId = item.question_id;
-        const userAnswer = item.user_answer;
+        let questionId = item.question_id;
+        let userAnswer = item.user_answer;
 
+        question_id.push(item.question_id);
+        user_answer.push(item.user_answer);
         const idQuestion = await developGetQuestionByIdRepo(questionId);
         const dataRealAnswer = idQuestion.real_answer;
 
         // ----------------- Multi Answers ----------------
         if (Array.isArray(userAnswer)) {
-          // Jika userAnswer adalah array, lakukan looping
+          // Jika user_answer adalah array, lakukan looping
 
           // split kunci jawaban dari database
           const formattedResult = dataRealAnswer.split(" | ");
@@ -29,25 +32,29 @@ export const compareAnswer = async (answerUser, userId) => {
           }
 
           if (isAnswerCorrect) {
-            usersScore += 20;
-            console.log(usersScore, 1818);
+            score += 20;
+            console.log(score, 1818);
           } else {
-            console.log(usersScore, 2020);
+            console.log(score, 2020);
           }
           //  ------------------ Satu Answer --------------
         } else if (dataRealAnswer === userAnswer) {
-          usersScore += 20;
-          console.log(usersScore, 1919);
+          score += 20;
+          console.log(score, 1919);
         } else {
-          console.log(usersScore, 2112);
+          console.log(score, 2112);
         }
       }
     } catch (error) {
       throw error;
     }
   }
-  passedCheck(usersScore, userId);
-  return usersScore;
+
+  const passed = passedCheck(score, user_id);
+  const dataUser = { user_id, level, question_type, question_id, user_answer, passed, score };
+  const saveAnswerUser = await developCreateAnswerUserRepo(dataUser);
+
+  return { score };
 };
 
 export const passedCheck = (scoreResult, user_id) => {
@@ -56,6 +63,5 @@ export const passedCheck = (scoreResult, user_id) => {
     developUpdateLevelUserRepo(user_id);
     passedLevel = true;
   }
-
-  return passedCheck;
+  return passedLevel;
 };

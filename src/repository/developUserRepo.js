@@ -1,4 +1,4 @@
-import { Userdevelop, UserAnswerdevelop } from "../models/developModel.js";
+import { Userdevelop, UserAnswerLeveldevelop } from "../models/developModel.js";
 
 export const developCreateUserRepo = async (data) => {
   try {
@@ -53,10 +53,10 @@ export const developUpdateLevelUserRepo = async (id) => {
 
 export const developCreateAnswerUserRepo = async (data) => {
   try {
-    const userAnswer = new UserAnswerdevelop(data);
+    const userAnswer = await UserAnswerLeveldevelop(data);
     return userAnswer.save();
   } catch (error) {
-    console.log("repo : failed to create user");
+    console.log("repo : failed to create answer user");
     throw error;
   }
 };
