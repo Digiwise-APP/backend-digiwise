@@ -44,7 +44,7 @@ export const developLoginUserService = async (email, password) => {
         username: user.username,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "2h" }
     );
 
     return { token };

@@ -21,7 +21,7 @@ router.get("/question/:questionId", verifyToken, developGetQuestionUserByIdQuest
 // --------------------------------- ANSWER USER -----------------------------------
 router.post("/answers", verifyToken, developUserAnswerController);
 
-router.get("/", developGetAllUserController);
+router.get("/", verifyToken, developGetAllUserController);
 router.get("/:id", developGetUserByIdController);
 
 export default router;
