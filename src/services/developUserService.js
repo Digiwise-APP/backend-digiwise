@@ -139,7 +139,7 @@ export const developUserAnswerService = async (userId, level, userAnswer, questi
       throw new CustomError("Kamu belum bisa akses quiz ini, karna level kamu belum mencukupi", 400);
     }
 
-    const calculate = compareAnswer(userAnswer, userId);
+    const calculate = await compareAnswer(userAnswer, userId, level, questionType);
     return calculate;
   } catch (error) {
     console.log("service : failed to post questions Id by User level", error);

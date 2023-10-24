@@ -27,36 +27,23 @@ const developQuestionSchema = new mongoose.Schema(
   }
 );
 
-const developUserAnswerSchema = new mongoose.Schema(
+const developUserAnswerLevelSchema = new mongoose.Schema(
   {
-    question_id: { type: String, ref: "Question" },
-    user_id: { type: String, ref: "User" },
-    question_type: { type: String, enum: ["PG", "truefalse", "checkbox", "mix"], required: true },
-    question: { type: String, required: true },
-    option_answer: { type: String },
+    user_id: { type: String, ref: "UserDevelop" },
     level: { type: Number, required: true, enum: [1, 2, 3, 4, 5] },
-    attempt: { type: Number },
-    real_answer: { type: String, required: true },
-    user_answer: { type: String },
+    question_type: { type: String },
+    question_id: { type: Array, ref: "QuestionDevelop" },
+    user_answer: { type: mongoose.Schema.Types.Mixed },
     passed: { type: Boolean },
+    score: { type: Number },
   },
   {
     versionKey: false,
-    timestamps: true,
   }
 );
 
-const developUserAnswerLevelSchema = new mongoose.Schema({
-  user_id: { type: String, ref: "User" },
-  level: { type: Number, required: true, enum: [1, 2, 3, 4, 5] },
-  question_type: { type: String },
-  user_answer: { type: mongoose.Schema.Types.Mixed },
-  attempt: { type: Number },
-  passed: { type: Boolean },
-});
-
 const Userdevelop = mongoose.model("UserDevelop", developUserSchema);
 const Questiondevelop = mongoose.model("QuestionDevelop", developQuestionSchema);
-const UserAnswerdevelop = mongoose.model("UserAnswerDevelop", developUserAnswerSchema);
+const UserAnswerLeveldevelop = mongoose.model("UserAnswerLevelDevelop", developUserAnswerLevelSchema);
 
-export { Userdevelop, Questiondevelop, UserAnswerdevelop };
+export { Userdevelop, Questiondevelop, UserAnswerLeveldevelop };
