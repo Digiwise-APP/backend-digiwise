@@ -31,7 +31,9 @@ export const developLoginUserService = async (email, password) => {
       throw new CustomError("user not found", 404);
     }
 
-    const match = await bcrypt.compare(password, user.password);
+    const level = user.level;
+
+    const match = bcrypt.compare(password, user.password);
     if (!match) {
       console.log("service : password is not compare");
       throw new CustomError("Wrong Email or Password ", 400);
@@ -47,7 +49,7 @@ export const developLoginUserService = async (email, password) => {
       { expiresIn: "2h" }
     );
 
-    return { token };
+    return { token, level };
   } catch (error) {
     console.log("service : please register first");
     throw error;
