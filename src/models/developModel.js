@@ -42,8 +42,20 @@ const developUserAnswerLevelSchema = new mongoose.Schema(
   }
 );
 
+const developLevelSchema = new mongoose.Schema(
+  {
+    level: { type: Number, required: true, enum: [1, 2, 3, 4, 5] },
+    medal: { type: String },
+    description: { type: String },
+  },
+  {
+    versionKey: false,
+  }
+);
+
 const Userdevelop = mongoose.model("UserDevelop", developUserSchema);
+const LevelDevelop = mongoose.model("LevelDevelop", developLevelSchema);
 const Questiondevelop = mongoose.model("QuestionDevelop", developQuestionSchema);
 const UserAnswerLeveldevelop = mongoose.model("UserAnswerLevelDevelop", developUserAnswerLevelSchema);
 
-export { Userdevelop, Questiondevelop, UserAnswerLeveldevelop };
+export { Userdevelop, Questiondevelop, UserAnswerLeveldevelop, LevelDevelop };
