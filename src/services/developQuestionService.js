@@ -13,8 +13,6 @@ export const developCreateQuestionService = async (dataQuestion) => {
 
 export const developGetQuestionByIdService = async (id) => {
   try {
-    console.log(id, 3737);
-    
     const questionId = await developGetQuestionByIdRepo(id);
     console.log(questionId, 4848);
     if (questionId == null) {

@@ -21,6 +21,9 @@ router.get("/question/:questionId", verifyToken, developGetQuestionUserByIdQuest
 // --------------------------------- ANSWER USER -----------------------------------
 router.post("/answers", verifyToken, developUserAnswerController);
 
+// --------------------------------- to GET medal ----------------------------------
+// router.get("/medal", verifyToken, )
+
 router.get("/", verifyToken, developGetAllUserController);
 router.get("/:id", developGetUserByIdController);
 

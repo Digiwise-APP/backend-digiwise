@@ -1,5 +1,6 @@
 import { developCreateUserRepo, developGetUserByEmailRepo, developGetAllUserRepo, developGetUserByIdRepo } from "../repository/developUserRepo.js";
 import { developGetQuestionByLevelRepo, developGetQuestionByIdRepo } from "../repository/developQuestionRepo.js";
+import {developGetMedalUserLevelRepo} from "../repository/developLevelRepo.js"
 import { CustomError } from "../pkg/customError.js";
 import { compareAnswer } from "./calculation.js";
 import bcrypt from "bcrypt";
@@ -147,3 +148,19 @@ export const developUserAnswerService = async (userId, level, userAnswer, questi
     throw error;
   }
 };
+
+export const developGetMedalUserLevelService = async (userId, level) =>{
+  try {
+    const dataMedal = await developGetMedalUserLevelRepo(level)
+    const dataUserLevel = await developGetUserByIdRepo(userId)
+
+    if (dataUserLevel.level == dataMedal) {
+      
+    }
+
+    
+  } catch (error) {
+    console.log("service : failed to post questions Id by User level", error);
+    throw error;
+  }
+} 

@@ -99,11 +99,20 @@ export const developUserAnswerController = async (req, res) => {
       question_id: answer.question_id,
       user_answer: answer.user_answer,
     }));
-    
+
     const result = await developUserAnswerService(userId, level, userAnswer, question_type);
 
     generateResponse(res, 201, "success post questions Id by User level passed", result);
   } catch (error) {
+    responseError(res, error);
+  }
+};
+
+export const developGetMedalUserLevelController = async (req, res) => {
+  try {
+    
+  } catch (error) {
+    
     responseError(res, error);
   }
 };

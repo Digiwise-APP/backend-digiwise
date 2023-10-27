@@ -9,3 +9,13 @@ export const developCreateLevelRepo = async (data) => {
     throw error;
   }
 };
+
+export const developGetMedalUserLevelRepo = async (level) => {
+  try {
+    const data = LevelDevelop.find({ level: level });
+    return data;
+  } catch (error) {
+    console.log("repo : failed to get medal level by level");
+    throw error;
+  }
+};
