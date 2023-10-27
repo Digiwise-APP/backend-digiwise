@@ -7,7 +7,6 @@ import {
   developGetQuestionUserByIdQuestionService,
   developUserAnswerService,
 } from "../services/developUserService.js";
-import { compareAnswer } from "../services/calculation.js";
 import { generateResponse, responseError } from "../pkg/responder.js";
 import { CustomError } from "../pkg/customError.js";
 

@@ -1,6 +1,6 @@
 import { developCreateUserRepo, developGetUserByEmailRepo, developGetAllUserRepo, developGetUserByIdRepo } from "../repository/developUserRepo.js";
 import { developGetQuestionByLevelRepo, developGetQuestionByIdRepo } from "../repository/developQuestionRepo.js";
-import {developGetMedalUserLevelRepo} from "../repository/developLevelRepo.js"
+import { developGetMedalUserLevelRepo } from "../repository/developLevelRepo.js";
 import { CustomError } from "../pkg/customError.js";
 import { compareAnswer } from "./calculation.js";
 import bcrypt from "bcrypt";
@@ -34,7 +34,7 @@ export const developLoginUserService = async (email, password) => {
 
     const level = user.level;
 
-    const match = bcrypt.compare(password, user.password);
+    const match = await bcrypt.compare(password, user.password);
     if (!match) {
       console.log("service : password is not compare");
       throw new CustomError("Wrong Email or Password ", 400);
@@ -149,18 +149,15 @@ export const developUserAnswerService = async (userId, level, userAnswer, questi
   }
 };
 
-export const developGetMedalUserLevelService = async (userId, level) =>{
+export const developGetMedalUserLevelService = async (userId, level) => {
   try {
-    const dataMedal = await developGetMedalUserLevelRepo(level)
-    const dataUserLevel = await developGetUserByIdRepo(userId)
+    const dataMedal = await developGetMedalUserLevelRepo(level);
+    const dataUserLevel = await developGetUserByIdRepo(userId);
 
     if (dataUserLevel.level == dataMedal) {
-      
     }
-
-    
   } catch (error) {
     console.log("service : failed to post questions Id by User level", error);
     throw error;
   }
-} 
+};
