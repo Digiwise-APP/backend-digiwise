@@ -12,6 +12,6 @@ router.use("/users", userRoute);
 router.use("/questions", questionRoute);
 
 // ----------------- Level ---------------------------
-router.use("/", levelRoute);
+router.use("/level", levelRoute);
 
 export default router;

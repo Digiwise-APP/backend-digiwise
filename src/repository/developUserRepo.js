@@ -40,9 +40,23 @@ export const developGetUserByIdRepo = async (id) => {
   }
 };
 
+export const developGetUserByLevelRepo = async (level) => {
+  try {
+    const data = Userdevelop.find({ level: level });
+    return data;
+  } catch (error) {
+    console.log("repo : failed to get medal level by level");
+    throw error;
+  }
+};
+
 export const developUpdateLevelUserRepo = async (id) => {
   try {
-    const updateLevel = await Userdevelop.findByIdAndUpdate(id, { $inc: { level: 1 } }, { new: true });
+    const updateLevel = await Userdevelop.findByIdAndUpdate(
+      id,
+      { $inc: { level: 1 } },
+      { new: true }
+    );
     return updateLevel;
   } catch (error) {
     console.log("repo : failed to update user level by id");

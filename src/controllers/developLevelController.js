@@ -1,4 +1,7 @@
-import { developCreateLevelService } from "../services/developLevelService.js";
+import {
+  developCreateLevelService,
+  getMedalByLevel,
+} from "../services/developLevelService.js";
 import { generateResponse, responseError } from "../pkg/responder.js";
 
 export const developCreateLevelController = async (req, res) => {
@@ -15,3 +18,15 @@ export const developCreateLevelController = async (req, res) => {
   }
 };
 
+// Endpoint untuk mendapatkan data medal berdasarkan level pengguna
+export const getUserMedalByLevel = async (req, res) => {
+  const { level } = req.params;
+  const userId = req.user.user_id;
+  try {
+    const medalData = await getMedalByLevel(level, userId);
+
+    generateResponse(res, 200, "Success get medal", medalData);
+  } catch (error) {
+    responseError(res, error);
+  }
+};
