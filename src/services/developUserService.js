@@ -45,6 +45,7 @@ export const developLoginUserService = async (email, password) => {
         user_id: user._id,
         email: user.email,
         username: user.username,
+        level: user.level,
       },
       process.env.JWT_SECRET,
       { expiresIn: "2h" }
@@ -151,11 +152,14 @@ export const developUserAnswerService = async (userId, level, userAnswer, questi
 
 export const developGetMedalUserLevelService = async (userId, level) => {
   try {
-    const dataMedal = await developGetMedalUserLevelRepo(level);
     const dataUserLevel = await developGetUserByIdRepo(userId);
-
-    if (dataUserLevel.level == dataMedal) {
+    if (!dataUserLevel) {
+      console.log("service: user not found");
+      throw new responseError("service: user not found", 404);
     }
+
+    const dataMedal = await developGetMedalUserLevelRepo(level - 1);
+    return dataMedal;
   } catch (error) {
     console.log("service : failed to post questions Id by User level", error);
     throw error;

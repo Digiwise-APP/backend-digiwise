@@ -6,6 +6,7 @@ import {
   developGetQuestionUserByLevelService,
   developGetQuestionUserByIdQuestionService,
   developUserAnswerService,
+  developGetMedalUserLevelService,
 } from "../services/developUserService.js";
 import { generateResponse, responseError } from "../pkg/responder.js";
 import { CustomError } from "../pkg/customError.js";
@@ -109,9 +110,12 @@ export const developUserAnswerController = async (req, res) => {
 
 export const developGetMedalUserLevelController = async (req, res) => {
   try {
-    
+    const level = req.user.level;
+    const userId = req.user.user_id;
+    const medal = await developGetMedalUserLevelService(userId, level);
+
+    generateResponse(res, 200, "success get medal by user", medal);
   } catch (error) {
-    
     responseError(res, error);
   }
 };

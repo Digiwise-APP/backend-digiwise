@@ -8,6 +8,7 @@ import {
   developGetQuestionUserByLevelController,
   developGetQuestionUserByIdQuestionController,
   developUserAnswerController,
+  developGetMedalUserLevelController,
 } from "../controllers/developUserController.js";
 import { verifyToken } from "../middleware/authMiddleware.js";
 
@@ -22,7 +23,7 @@ router.get("/question/:questionId", verifyToken, developGetQuestionUserByIdQuest
 router.post("/answers", verifyToken, developUserAnswerController);
 
 // --------------------------------- to GET medal ----------------------------------
-// router.get("/medal", verifyToken, )
+router.get("/medal", verifyToken, developGetMedalUserLevelController);
 
 router.get("/", verifyToken, developGetAllUserController);
 router.get("/:id", developGetUserByIdController);
