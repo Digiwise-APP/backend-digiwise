@@ -33,6 +33,7 @@ export const developLoginUserService = async (email, password) => {
     }
 
     const level = user.level;
+    const username = user.username;
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
@@ -51,7 +52,7 @@ export const developLoginUserService = async (email, password) => {
       { expiresIn: "2h" }
     );
 
-    return { token, level };
+    return { token, username, level };
   } catch (error) {
     console.log("service : please register first");
     throw error;
