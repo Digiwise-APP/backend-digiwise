@@ -1,15 +1,5 @@
 # Quiz Documentation
 
-## Create level question quiz
-
-- membuat pertanyaan berdasarkan level
-- level, title, option
-- pilihan jawaban (a, b, c, d)
-
-1. Collection
-   - question
-   - answer
-
 ### POST QUESTION
 
 Endpoint : POST /quiz/question

@@ -30,7 +30,7 @@ export const developGetAllQuestionsService = async () => {
   try {
     return await developGetAllQuestionsRepo();
   } catch (error) {
-    console.log("service : failed to create question", error);
+    console.log("service : failed to get all question", error);
     throw error;
   }
 };

@@ -1,0 +1,114 @@
+{
+  "definition": {
+    "swagger": "2.0",
+    "openapi": "1.0.0",
+    "info": {
+      "title": "API Digiwise",
+      "description": "Documentation whole API in this project",
+      "version": "1.0.0"
+    },
+    "server": [
+      {
+        "url": "http://localhost:5000/",
+        "description": "localhost"
+      },
+      {
+        "url": "https://backend-digiwise.vercel.app/",
+        "description": "public API"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Question",
+        "description": "API question without Authorization"
+      },
+      {
+        "name": "User",
+        "description": "API user"
+      },
+      {
+        "name": "Medal",
+        "description": "API medal"
+      }
+    ],
+    "paths": {
+      "/questions": {
+        "get": {
+          "tags": ["Question"],
+          "summary": "Get All Questions",
+          "description": "Get all questions in database mongo ",
+          "responses": {
+            "200": {
+              "description": "success"
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Question"],
+          "summary": "Create Question",
+          "consumes": "multipart/form-data",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer"
+                    },
+                    "question": {
+                      "type": "string"
+                    },
+                    "option_answer": {
+                      "type": "string"
+                    },
+                    "real_answer": {
+                      "type": "string"
+                    },
+                    "question_type": {
+                      "type": "string"
+                    },
+                    "url_image": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "succes create question"
+            }
+          }
+        }
+      },
+      "/questions/{id}": {
+        "get": {
+          "tags": ["Question"],
+          "summary": "Get question by id",
+          "description": "Get one question in mongo by id question",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "schema": {
+                "type": "string"
+              },
+              "description": "Id question"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "success"
+            }
+          }
+        }
+      }
+    }
+  },
+  "apis": ["./apidocs.json"]
+}
