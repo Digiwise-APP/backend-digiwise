@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  mongo:
+    container_name: digiwiselocal
+    image: mongo:6.0
+    ports:
+      - 5050:27017
