@@ -1,13 +1,12 @@
 {
   "definition": {
-    "swagger": "2.0",
-    "openapi": "1.0.0",
+    "openapi": "3.1.0",
     "info": {
       "title": "API Digiwise",
       "description": "Documentation whole API in this project",
       "version": "1.0.0"
     },
-    "server": [
+    "servers": [
       {
         "url": "http://localhost:5000/",
         "description": "localhost"
