@@ -159,7 +159,7 @@ export const developGetMedalUserLevelService = async (userId, level) => {
       throw new responseError("service: user not found", 404);
     }
 
-    const dataMedal = await developGetMedalUserLevelRepo(level - 1);
+    const dataMedal = await developGetMedalUserLevelRepo(dataUserLevel.level - 1);
     return dataMedal;
   } catch (error) {
     console.log("service : failed to post questions Id by User level", error);
