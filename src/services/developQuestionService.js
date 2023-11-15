@@ -14,7 +14,6 @@ export const developCreateQuestionService = async (dataQuestion) => {
 export const developGetQuestionByIdService = async (id) => {
   try {
     const questionId = await developGetQuestionByIdRepo(id);
-    console.log(questionId, 4848);
     if (questionId == null) {
       console.log("service: question not found");
       throw new responseError("service: question not found", 404);

@@ -32,9 +32,7 @@ export const developCreateQuestionController = async (req, res) => {
 export const developGetQuestionByIdController = async (req, res) => {
   try {
     const questionId = req.params.id;
-    console.log(questionId, 6543);
     const dataQuestionId = await developGetQuestionByIdService(questionId);
-    console.log(dataQuestionId, 5656);
     generateResponse(res, 200, "success question by id", dataQuestionId);
   } catch (error) {
     responseError(res, error);

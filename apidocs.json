@@ -6,6 +6,15 @@
       "description": "Documentation whole API in this project",
       "version": "1.0.0"
     },
+    "components": {
+      "securitySchemes": {
+        "ApiKeyAuth": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "Authorization"
+        }
+      }
+    },
     "servers": [
       {
         "url": "http://localhost:5000/",
@@ -24,10 +33,6 @@
       {
         "name": "User",
         "description": "API user"
-      },
-      {
-        "name": "Medal",
-        "description": "API medal"
       }
     ],
     "paths": {
@@ -38,7 +43,17 @@
           "description": "Get all questions in database mongo ",
           "responses": {
             "200": {
-              "description": "success"
+              "description": "success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
             },
             "500": {
               "description": "internal server error"
@@ -48,10 +63,9 @@
         "post": {
           "tags": ["Question"],
           "summary": "Create Question",
-          "consumes": "multipart/form-data",
           "requestBody": {
             "content": {
-              "multipart/form-data": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
@@ -103,6 +117,249 @@
           "responses": {
             "200": {
               "description": "success"
+            }
+          }
+        }
+      },
+
+      "/users": {
+        "get": {
+          "security": [
+            {
+              "ApiKeyAuth": []
+            }
+          ],
+          "tags": ["User"],
+          "summary": "Get All Users",
+          "description": "Get all users in database mongo ",
+
+          "responses": {
+            "200": {
+              "description": "success"
+            },
+            "500": {
+              "description": "internal server error"
+            },
+            "401": {
+              "description": "Access denied"
+            }
+          }
+        }
+      },
+      "/users/{id}": {
+        "get": {
+          "tags": ["User"],
+          "summary": "Get user by id",
+          "description": "Get one user in mongo by id question",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "schema": {
+                "type": "string"
+              },
+              "description": "Id user"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "success"
+            }
+          }
+        }
+      },
+      "/users/register": {
+        "post": {
+          "tags": ["User"],
+          "summary": "Register User",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    },
+                    "image_profile": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "succes registered user"
+            }
+          }
+        }
+      },
+      "/users/login": {
+        "post": {
+          "tags": ["User"],
+          "summary": "Login User",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "succes create question"
+            }
+          }
+        }
+      },
+      "/users/questions": {
+        "get": {
+          "security": [
+            {
+              "ApiKeyAuth": []
+            }
+          ],
+          "tags": ["User"],
+          "summary": "Get All Users",
+          "description": "Get all users in database mongo ",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "level",
+              "schema": {
+                "type": "integer"
+              },
+              "description": "The user level"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "success"
+            },
+            "500": {
+              "description": "internal server error"
+            },
+            "401": {
+              "description": "Access denied"
+            }
+          }
+        }
+      },
+      "/users/question/{questionId}": {
+        "get": {
+          "security": [
+            {
+              "ApiKeyAuth": []
+            }
+          ],
+          "tags": ["User"],
+          "summary": "Get question user's by id question",
+          "description": "Get one question user's in mongo by id question",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "questionId",
+              "schema": {
+                "type": "string"
+              },
+              "description": "Id question"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "success"
+            }
+          }
+        }
+      },
+      "/users/answers/": {
+        "post": {
+          "security": [
+            {
+              "ApiKeyAuth": []
+            }
+          ],
+          "tags": ["User"],
+          "summary": "Post user answers",
+          "description": "Post users answer in database mongo ",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "level": {
+                      "type": "integer"
+                    },
+                    "question_type": {
+                      "type": "string"
+                    },
+                    "answers": [
+                      {
+                        "question_id": "string",
+                        "user_answer": "string"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+
+          "responses": {
+            "200": {
+              "description": "success"
+            },
+            "500": {
+              "description": "internal server error"
+            },
+            "401": {
+              "description": "Access denied"
+            },
+            "404": {
+              "description": "Not found"
+            }
+          }
+        }
+      },
+      "/users/medal": {
+        "get": {
+          "security": [
+            {
+              "ApiKeyAuth": []
+            }
+          ],
+          "tags": ["User"],
+          "summary": "Get user answers",
+          "description": "Get all users in database mongo ",
+
+          "responses": {
+            "200": {
+              "description": "success"
+            },
+            "500": {
+              "description": "internal server error"
+            },
+            "401": {
+              "description": "Access denied"
             }
           }
         }
