@@ -8,18 +8,23 @@ Link to the website : [Digiwise](https://digiwise.vercel.app/)
 
 <div align="left">
 
- <img src="https://skillicons.dev/icons?i=nodejs,mongo,express,postman&perline=5" alt="Tech Stack" /> 
+ <img src="https://skillicons.dev/icons?i=nodejs,mongo,express,postman,vercel,docker&perline=5" alt="Tech Stack" /> 
  
 </div>
 
 ## Table of Content
-
-1. [Database structure](#database-structure)
-2. [Endpoint](#endpoint)
-3.
+1. [Asset](#asset)
+2. [Database structure](#database-structure)
+3. [Endpoint](#endpoint)
 4. [How to Run in Local](#how-to-run-in-local)
+5. [How to run API swagger in local](#how-to-run-api-swagger-in-local)
 
-https://drive.google.com/file/d/14H7tm-U2wV0Bjg-l5ZrelLD7cr82eqCO/view?usp=drive_link
+
+
+## Asset
+1. If you want to check this API in postman, you can import this asset into your postman https://drive.google.com/file/d/14H7tm-U2wV0Bjg-l5ZrelLD7cr82eqCO/view?usp=drive_link
+
+2. Or if you want to check the API via swagger, you can follow the instructions below [How to run API swagger in local](#how-to-run-api-swagger-in-local)
 
 ## Database Structure
 
@@ -54,6 +59,9 @@ https://drive.google.com/file/d/14H7tm-U2wV0Bjg-l5ZrelLD7cr82eqCO/view?usp=drive
 1. Method GET `http://localhost:5000/users` to get all user
 1. Method GET `http://localhost:5000/users/:id` to get user by id
 
+#### Medal User
+1. Method Get `http://localhost:5000/users/medal` to get a medal according to the user's pass level
+
 ## How to Run in Local
 
 1. Clone the repository to your local machine.
@@ -71,4 +79,22 @@ https://drive.google.com/file/d/14H7tm-U2wV0Bjg-l5ZrelLD7cr82eqCO/view?usp=drive
 4. Start the backend server on port 5000
    ```bash
    nodemon index.js
+   ```
+
+## How to run API swagger in local
+1. After you clone this repository, you can move on to other branch
+    ```bash
+   git checkout development
+   ```
+2. Do the command below to create a new container and run it
+     ```bash
+   docker-compose up -d
+   ```
+3. Run the application
+     ```bash
+   npm run start
+   ```
+4. Open in your browser to see the API documentation
+     ```bash
+   http://localhost:5000/api-docs/
    ```
